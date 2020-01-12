@@ -22,7 +22,6 @@ public class ProductServiceImpl extends BaseService implements ProductService {
 	JdbcTemplate jdbcTemplate;
 
 	@Override
-	@Transactional
 	public DubboResponse<ProductVO> addProductAndStock(ProductVO prod) throws DemoRpcRunTimeException {
 		DubboResponse<ProductVO> response = null;
 		int newProdId = 0;
@@ -49,10 +48,9 @@ public class ProductServiceImpl extends BaseService implements ProductService {
 					returnData.setProductId(newProdId);
 					returnData.setProductName(prod.getProductName());
 					returnData.setStock(prod.getStock());
-					response = new DubboResponse(HttpStatus.OK.value(), "success", returnData);
-					// throw new Exception("Mk throwed exception to enforce rollback[insert into
-					// t_stock] ");
-					// return response;
+					//response = new DubboResponse(HttpStatus.OK.value(), "success", returnData);
+					throw new Exception("Mk throwed exception to enforce rollback[insert into t_stock]");
+					//return response;
 				}
 
 			} else {
