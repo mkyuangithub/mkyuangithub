@@ -46,7 +46,7 @@ public class UserController extends BaseController {
 			JSONObject requestJsonObj = JSON.parseObject(params);
 			UserVO inputUser = getUserFromJson(requestJsonObj);
 			BloomFilterHelper<String> myBloomFilterHelper = new BloomFilterHelper<>((Funnel<String>) (from,
-					into) -> into.putString(from, Charsets.UTF_8).putString(from, Charsets.UTF_8), 500000, 0.00001);
+					into) -> into.putString(from, Charsets.UTF_8).putString(from, Charsets.UTF_8), 1500000, 0.00001);
 			redisUtil.addByBloomFilter(myBloomFilterHelper, "email_existed_bloom", inputUser.getEmail());
 			result.put("code", HttpStatus.OK.value());
 			result.put("message", "add into bloomFilter successfully");
@@ -74,7 +74,7 @@ public class UserController extends BaseController {
 			JSONObject requestJsonObj = JSON.parseObject(params);
 			UserVO inputUser = getUserFromJson(requestJsonObj);
 			BloomFilterHelper<String> myBloomFilterHelper = new BloomFilterHelper<>((Funnel<String>) (from,
-					into) -> into.putString(from, Charsets.UTF_8).putString(from, Charsets.UTF_8), 500000, 0.00001);
+					into) -> into.putString(from, Charsets.UTF_8).putString(from, Charsets.UTF_8), 1500000, 0.00001);
 			boolean answer = redisUtil.includeByBloomFilter(myBloomFilterHelper, "email_existed_bloom",
 					inputUser.getEmail());
 			logger.info("answer=====" + answer);
