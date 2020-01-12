@@ -36,7 +36,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RequestMapping("nacosconsumer")
 public class DemoDubboConsumer extends BaseController {
 
-	@Reference(version = "1.0.0")
+	@Reference(version = "1.0.0", loadbalance = "roundrobin")
 	private HelloNacosService helloNacosService;
 
 	@Reference(version = "1.0.0")
@@ -88,7 +88,7 @@ public class DemoDubboConsumer extends BaseController {
 				returnResultStr = JSON.toJSONString(result);
 				response = new ResponseEntity<>(returnResultStr, headers, HttpStatus.EXPECTATION_FAILED);
 			} else {
-				result.put("message", "dubbo service ProductService get nullpoint exception");
+				result.put("message", dubboResponse.getMessage());
 				returnResultStr = JSON.toJSONString(result);
 				response = new ResponseEntity<>(returnResultStr, headers, HttpStatus.EXPECTATION_FAILED);
 			}
