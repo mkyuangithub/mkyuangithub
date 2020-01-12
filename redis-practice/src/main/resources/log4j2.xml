@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+	<properties>
+		<property name="logPath">../logs</property>
+	</properties>
+
+	<Appenders>
+		<Console name="Console" target="SYSTEM_OUT"
+			ignoreExceptions="false">
+			<PatternLayout pattern="%d [%t] %-5p %c - %m%n" />
+			<ThresholdFilter level="trace" onMatch="ACCEPT"
+				onMismatch="DENY" />
+		</Console>
+		<RollingFile name="infoLog"
+			fileName="${logPath}/redis-practice.log"
+			filePattern="${logPath}/redis-practice_info-%d{yyyy-MM-dd}.log"
+			append="true" immediateFlush="true">
+			<PatternLayout pattern="%d [%t] %-5p %c - %m%n" />
+			<TimeBasedTriggeringPolicy />
+			<Policies>
+				<SizeBasedTriggeringPolicy size="2048 MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="30"
+				compressionLevel="9" />
+			<Filters>
+				<ThresholdFilter level="error" onMatch="DENY"
+					onMismatch="NEUTRAL" />
+				<ThresholdFilter level="trace" onMatch="ACCEPT"
+					onMismatch="DENY" />
+			</Filters>
+		</RollingFile>
+
+		<RollingFile name="errorLog"
+			fileName="${logPath}/redis-practice.log_error.log"
+			filePattern="${logPath}/redis-practice_error-%d{yyyy-MM-dd}.log"
+			append="true" immediateFlush="true">
+			<PatternLayout pattern="%d [%t] %-5p %c - %m%n" />
+			<TimeBasedTriggeringPolicy />
+			<Policies>
+				<SizeBasedTriggeringPolicy size="2048 MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="30"
+				compressionLevel="9" />
+			<Filters>
+				<ThresholdFilter level="error" onMatch="ACCEPT"
+					onMismatch="DENY" />
+			</Filters>
+		</RollingFile>
+	</Appenders>
+	<Loggers>
+		<AsyncLogger name="org.springframework.*" level="DEBUG" />
+		<AsyncLogger name="org.sky.Application" level="DEBUG"
+			additivity="DEBUG">
+			<AppenderRef ref="infoLog" />
+			<AppenderRef ref="errorLog" />
+			<AppenderRef ref="Console" />
+		</AsyncLogger>
+
+		<AsyncLogger name="druid.sql.Statement" level="DEBUG"
+			additivity="false">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="infoLog" />
+			<AppenderRef ref="errorLog" />
+		</AsyncLogger>
+
+		<Root level="INFO">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="infoLog" />
+		</Root>
+	</Loggers>
+</Configuration>
