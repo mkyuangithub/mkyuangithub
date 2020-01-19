@@ -91,6 +91,7 @@
 			<artifactId>skycommon</artifactId>
 			<version>${skycommon.version}</version>
 		</dependency>
+
 	</dependencies>
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>
