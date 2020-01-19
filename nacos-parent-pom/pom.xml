@@ -27,7 +27,7 @@
 		<spring.data.redis>1.8.14-RELEASE</spring.data.redis>
 		<skycommon.version>0.0.1-SNAPSHOT</skycommon.version>
 		<seata.version>0.9.0</seata.version>
-		<netty.version>4.1.32.Final</netty.version>
+		<netty.version>4.1.42.Final</netty.version>
 		<nacos.spring.version>0.1.4</nacos.spring.version>
 		<lombok.version>1.16.22</lombok.version>
 		<javax.servlet.version>3.1.0</javax.servlet.version>
