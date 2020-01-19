@@ -10,20 +10,19 @@ import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
 
 @Configuration
-@EnableAutoConfiguration
 public class DruidConfig {
-
-	@ConfigurationProperties(prefix = "spring.datasource")
 	@Bean
-	public DruidDataSource dataSource() {
-
+	@ConfigurationProperties(prefix = "spring.datasource")
+	public DruidDataSource druidDataSource() {
 		return new DruidDataSource();
 
 	}
+
 }

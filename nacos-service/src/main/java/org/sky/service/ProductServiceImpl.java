@@ -16,11 +16,14 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service(version = "1.0.0", interfaceClass = ProductService.class, timeout = 120000)
+
+@Service(version = "1.0.0", interfaceClass = ProductService.class, timeout = 12000)
+//@Service
 public class ProductServiceImpl extends BaseService implements ProductService {
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 
+	@Transactional
 	@Override
 	public DubboResponse<ProductVO> addProductAndStock(ProductVO prod) throws DemoRpcRunTimeException {
 		DubboResponse<ProductVO> response = null;
@@ -48,9 +51,10 @@ public class ProductServiceImpl extends BaseService implements ProductService {
 					returnData.setProductId(newProdId);
 					returnData.setProductName(prod.getProductName());
 					returnData.setStock(prod.getStock());
-					//response = new DubboResponse(HttpStatus.OK.value(), "success", returnData);
-					throw new Exception("Mk throwed exception to enforce rollback[insert into t_stock]");
-					//return response;
+					response = new DubboResponse(HttpStatus.OK.value(), "success", returnData);
+					// throw new Exception("Mk throwed exception to enforce rollback[insert into
+					// t_stock]");
+					return response;
 				}
 
 			} else {
@@ -61,6 +65,30 @@ public class ProductServiceImpl extends BaseService implements ProductService {
 			throw new DemoRpcRunTimeException("error occured on Dubbo Service Side: " + e.getMessage(), e);
 		}
 		return response;
+	}
+
+	@Override
+	public int addProduct(ProductVO prod) throws DemoRpcRunTimeException {
+		int result = 0;
+		String prodSql = "insert into t_product(product_name)values(?)";
+		try {
+			KeyHolder keyHolder = new GeneratedKeyHolder();
+
+			jdbcTemplate.update(new PreparedStatementCreator() {
+				@Override
+				public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+					PreparedStatement ps = connection.prepareStatement(prodSql, new String[] { "id" });
+					ps.setString(1, prod.getProductName());
+					return ps;
+				}
+			}, keyHolder);
+			result = keyHolder.getKey().intValue();
+			logger.info("======>insert into t_product with product_id:" + result);
+		} catch (Exception e) {
+			logger.error("error occured on addProduct from provider side" + e.getMessage(), e);
+			throw new DemoRpcRunTimeException("error occured on addProduct from provider side" + e.getMessage(), e);
+		}
+		return result;
 	}
 
 }
