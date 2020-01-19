@@ -1,16 +1,20 @@
 package org.sky.controller;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.sky.platform.util.AppConstants;
 import org.sky.platform.util.ResponseResult;
+import org.sky.seatademo.vo.SeataProductVO;
+import org.sky.tcc.bean.AccountBean;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 
 public abstract class BaseController {
 	protected Logger logger = LogManager.getLogger(this.getClass());
@@ -43,6 +47,31 @@ public abstract class BaseController {
 			response = new ResponseEntity<>(resultStr, headers, HttpStatus.OK);
 		}
 		return response;
+	}
+
+	protected SeataProductVO getSeataProductFromJson(JSONObject requestObj) {
+		String productName = requestObj.getString("productname");
+		int stock = requestObj.getIntValue("stock");
+		SeataProductVO prod = new SeataProductVO();
+		prod.setProductName(productName);
+		prod.setStock(stock);
+		return prod;
+	}
+
+	protected Map<String, AccountBean> getAccountFromJson(JSONObject requestObj) {
+		Map<String, AccountBean> acctMap = new HashMap<String, AccountBean>();
+		long accountFromId = requestObj.getLong("account_from");
+		long accountToId = requestObj.getLong("account_to");
+		double money = requestObj.getDoubleValue("transfer_money");
+		AccountBean acctFrom = new AccountBean();
+		acctFrom.setAccountId(accountFromId);
+		acctFrom.setAmount(money);
+		AccountBean acctTo = new AccountBean();
+		acctTo.setAccountId(accountToId);
+		acctTo.setAmount(money);
+		acctMap.put("account_from", acctFrom);
+		acctMap.put("account_to", acctTo);
+		return acctMap;
 	}
 
 }

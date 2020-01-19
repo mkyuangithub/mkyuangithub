@@ -6,4 +6,6 @@ import org.sky.vo.ProductVO;
 
 public interface ProductService {
 	public DubboResponse addProductAndStock(ProductVO prod) throws DemoRpcRunTimeException;
+
+	public int addProduct(ProductVO prod) throws DemoRpcRunTimeException;
 }
