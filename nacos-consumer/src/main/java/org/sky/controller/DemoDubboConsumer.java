@@ -7,21 +7,12 @@ import com.alibaba.fastjson.JSONObject;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+
 import java.util.Map;
 
-import javax.annotation.Resource;
-
 import org.apache.dubbo.config.annotation.Reference;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.sky.platform.util.AppConstants;
 import org.sky.platform.util.DubboResponse;
-import org.sky.platform.util.ResponseResult;
-import org.sky.platform.util.ResponseStatusEnum;
-import org.sky.platform.util.ResponseUtil;
 import org.sky.service.HelloNacosService;
 import org.sky.service.ProductService;
 import org.sky.vo.ProductVO;
@@ -36,7 +27,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RequestMapping("nacosconsumer")
 public class DemoDubboConsumer extends BaseController {
 
-	@Reference(version = "1.0.0", loadbalance = "roundrobin")
+	@Reference(version = "1.0.0")
 	private HelloNacosService helloNacosService;
 
 	@Reference(version = "1.0.0")
@@ -86,7 +77,7 @@ public class DemoDubboConsumer extends BaseController {
 				result.put("productname", returnData.getProductName());
 				result.put("stock", returnData.getStock());
 				returnResultStr = JSON.toJSONString(result);
-				response = new ResponseEntity<>(returnResultStr, headers, HttpStatus.EXPECTATION_FAILED);
+				response = new ResponseEntity<>(returnResultStr, headers, HttpStatus.OK);
 			} else {
 				result.put("message", dubboResponse.getMessage());
 				returnResultStr = JSON.toJSONString(result);
