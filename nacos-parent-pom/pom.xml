@@ -24,9 +24,13 @@
 		<mysql-connector-java.version>5.1.46</mysql-connector-java.version>
 		<disruptor.version>3.4.2</disruptor.version>
 		<aspectj.version>1.8.13</aspectj.version>
-		<nacos-service.version>0.0.1-SNAPSHOT</nacos-service.version>
 		<spring.data.redis>1.8.14-RELEASE</spring.data.redis>
 		<skycommon.version>0.0.1-SNAPSHOT</skycommon.version>
+		<seata.version>0.9.0</seata.version>
+		<netty.version>4.1.32.Final</netty.version>
+		<nacos.spring.version>0.1.4</nacos.spring.version>
+		<lombok.version>1.16.22</lombok.version>
+		<javax.servlet.version>3.1.0</javax.servlet.version>
 		<maven.compiler.source>${java.version}</maven.compiler.source>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
 		<compiler.plugin.version>3.8.1</compiler.plugin.version>
@@ -64,6 +68,12 @@
 				<groupId>org.apache.dubbo</groupId>
 				<artifactId>dubbo</artifactId>
 				<version>${dubbo.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>javax.servlet</groupId>
+						<artifactId>servlet-api</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.curator</groupId>
@@ -120,6 +130,33 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-starter-data-redis</artifactId>
 				<version>${spring-boot.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.seata</groupId>
+				<artifactId>seata-all</artifactId>
+				<version>${seata.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.netty</groupId>
+				<artifactId>netty-all</artifactId>
+				<version>${netty.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+				<version>${lombok.version}</version>
+			</dependency>
+			<!-- https://mvnrepository.com/artifact/com.alibaba.boot/nacos-config-spring-boot-starter -->
+			<dependency>
+				<groupId>com.alibaba.boot</groupId>
+				<artifactId>nacos-config-spring-boot-starter</artifactId>
+				<version>${nacos.spring.version}</version>
+				<exclusions>
+					<exclusion>
+						<artifactId>nacos-client</artifactId>
+						<groupId>com.alibaba.nacos</groupId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
