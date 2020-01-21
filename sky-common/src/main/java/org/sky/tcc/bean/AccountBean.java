@@ -6,7 +6,7 @@ public class AccountBean implements Serializable {
 	/**
 	 * 账户
 	 */
-	private long accountId;
+	private String accountId;
 	/**
 	 * 余额
 	 */
@@ -20,11 +20,11 @@ public class AccountBean implements Serializable {
 		return amount;
 	}
 
-	public long getAccountId() {
+	public String getAccountId() {
 		return accountId;
 	}
 
-	public void setAccountId(long accountId) {
+	public void setAccountId(String accountId) {
 		this.accountId = accountId;
 	}
 

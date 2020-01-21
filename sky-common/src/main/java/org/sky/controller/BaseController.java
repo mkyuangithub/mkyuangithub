@@ -60,8 +60,8 @@ public abstract class BaseController {
 
 	protected Map<String, AccountBean> getAccountFromJson(JSONObject requestObj) {
 		Map<String, AccountBean> acctMap = new HashMap<String, AccountBean>();
-		long accountFromId = requestObj.getLong("account_from");
-		long accountToId = requestObj.getLong("account_to");
+		String accountFromId = requestObj.getString("account_from");
+		String accountToId = requestObj.getString("account_to");
 		double money = requestObj.getDoubleValue("transfer_money");
 		AccountBean acctFrom = new AccountBean();
 		acctFrom.setAccountId(accountFromId);

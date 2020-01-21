@@ -4,19 +4,19 @@ import io.seata.rm.tcc.api.BusinessActionContext;
 import io.seata.rm.tcc.api.BusinessActionContextParameter;
 import io.seata.rm.tcc.api.TwoPhaseBusinessAction;
 
-public interface PlusMoneyAction {
+public interface MinusMoneyAction {
 
 	public String sayHello() throws RuntimeException;
 
 	/**
-	 * 一阶段给To帐户加钱
+	 * 一阶段从from帐户扣钱
 	 * 
 	 * @param businessActionContext
 	 * @param accountNo
 	 * @param amount
 	 */
-	@TwoPhaseBusinessAction(name = "plusMoneyAction", commitMethod = "commit", rollbackMethod = "rollback")
-	public boolean prepareAdd(BusinessActionContext businessActionContext,
+	@TwoPhaseBusinessAction(name = "minusMoneyAction", commitMethod = "commit", rollbackMethod = "rollback")
+	public boolean prepareMinus(BusinessActionContext businessActionContext,
 			@BusinessActionContextParameter(paramName = "accountNo") String accountNo,
 			@BusinessActionContextParameter(paramName = "amount") double amount);
 
