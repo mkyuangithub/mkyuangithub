@@ -20,7 +20,7 @@ import io.seata.spring.annotation.GlobalTransactionScanner;
 
 @Configuration
 public class DruidConfig {
-	@Bean(value = "druidDataSource", initMethod = "init", destroyMethod = "close")
+	@Bean
 	@ConfigurationProperties(prefix = "spring.datasource")
 	public DruidDataSource druidDataSource() {
 		return new DruidDataSource();
@@ -33,10 +33,10 @@ public class DruidConfig {
 	 * @Param: druidDataSource datasource bean instance
 	 * @Return: DataSourceProxy datasource proxy
 	 */
-	@Primary
-	@Bean("dataSource")
-	public DataSourceProxy dataSourceProxy(DataSource dataSource) {
-		return new DataSourceProxy(dataSource);
+
+	@Bean
+	public DataSourceProxy dataSourceProxy(DruidDataSource druidDataSource) {
+		return new DataSourceProxy(druidDataSource);
 	}
 
 	@Bean
@@ -49,8 +49,7 @@ public class DruidConfig {
 	 * 
 	 * @Return: JdbcTemplate
 	 */
-	@Primary
-	@Bean("jdbcTemplate")
+	@Bean
 	public JdbcTemplate dataSource(DataSourceProxy dataSourceProxy) {
 		return new JdbcTemplate(dataSourceProxy);
 	}
