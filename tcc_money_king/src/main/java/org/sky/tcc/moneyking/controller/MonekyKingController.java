@@ -41,12 +41,18 @@ public class MonekyKingController extends BaseController {
 			AccountBean acctTo = acctMap.get("account_to");
 			boolean answer = tccMoneyKingBizService.transfer(acctFrom.getAccountId(), acctTo.getAccountId(),
 					acctFrom.getAmount());
-			returnResultStr = "transfrom money[" + acctFrom.getAmount() + "] from: " + acctFrom.getAccountId() + "--->"
-					+ acctTo.getAccountId() + " with successfully";
+//			tccMoneyKingBizService.icbcHello();
+//			tccMoneyKingBizService.cmbHello();
+			result.put("account_from", acctFrom.getAccountId());
+			result.put("account_to", acctTo.getAccountId());
+			result.put("transfer_money", acctFrom.getAmount());
+			result.put("message", "transferred successfully");
+			returnResultStr = JSON.toJSONString(result);
+			logger.info("transfer money successfully======>\n" + returnResultStr);
 			response = new ResponseEntity<>(returnResultStr, headers, HttpStatus.OK);
 		} catch (Exception e) {
 			logger.error("transfer money with error: " + e.getMessage(), e);
-			result.put("message", "transfer money with error: " + e.getMessage());
+			result.put("message", "transfer money with error[ " + e.getMessage() + "]");
 			returnResultStr = JSON.toJSONString(result);
 			response = new ResponseEntity<>(returnResultStr, headers, HttpStatus.EXPECTATION_FAILED);
 		}

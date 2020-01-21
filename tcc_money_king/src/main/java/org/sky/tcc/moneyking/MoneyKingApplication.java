@@ -7,10 +7,10 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-@EnableDubbo
+
 @ServletComponentScan
 @EnableAutoConfiguration
-@ComponentScan(basePackages = { "org.sky.tcc" })
+@ComponentScan(basePackages = { "org.sky" })
 
 public class MoneyKingApplication {
 

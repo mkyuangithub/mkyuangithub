@@ -5,16 +5,9 @@ import io.seata.spring.annotation.GlobalTransactionScanner;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-@Configuration
-public class SeataAutoConfig {
+import org.springframework.context.annotation.ImportResource;
 
-	/**
-	 * init global transaction scanner
-	 *
-	 * @Return: GlobalTransactionScanner
-	 */
-	@Bean
-	public GlobalTransactionScanner globalTransactionScanner() {
-		return new GlobalTransactionScanner("tcc-money-king", "demo-tx-grp");
-	}
+@Configuration
+@ImportResource(locations = { "spring/seata-dubbo-reference.xml" })
+public class SeataAutoConfig {
 }
