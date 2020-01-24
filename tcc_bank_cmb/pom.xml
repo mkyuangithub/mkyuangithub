@@ -8,9 +8,9 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<groupId>org.sky.demo</groupId>
-	<artifactId>tcc-bank-provider</artifactId>
+	<artifactId>tcc-bank-cmb</artifactId>
 	<version>0.0.1</version>
-	<name>tcc-bank-icbc</name>
+	<name>tcc-bank-cmb</name>
 	<description>Demo project Dubbo+Nacos+SeataTCC</description>
 	<properties>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
