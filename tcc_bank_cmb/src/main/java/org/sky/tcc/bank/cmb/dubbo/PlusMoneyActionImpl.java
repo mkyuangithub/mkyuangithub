@@ -112,9 +112,10 @@ public class PlusMoneyActionImpl extends BaseService implements PlusMoneyAction 
 						return true;
 					}
 					// 冻结金额 清除
-					account.setFreezedAmount(account.getFreezedAmount() - amount);
-					transferMoneyDAO.updateFreezedAmount(account);
-
+					if (account.getFreezedAmount() >= amount) {
+						account.setFreezedAmount(account.getFreezedAmount() - amount);
+						transferMoneyDAO.updateFreezedAmount(account);
+					}
 					logger.info(String.format("======>Undo account[%s] amount[%f], dtx transaction id: %s.", accountNo,
 							amount, xid));
 					return true;
