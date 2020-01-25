@@ -1,11 +1,10 @@
-package org.sky.tcc.bankprovider.dubbo;
+package org.sky.tcc.bank.cmb.dubbo;
 
 import io.seata.rm.tcc.api.BusinessActionContext;
 import io.seata.rm.tcc.api.BusinessActionContextParameter;
 import io.seata.rm.tcc.api.TwoPhaseBusinessAction;
 
 public interface PlusMoneyAction {
-
 	public String sayHello() throws RuntimeException;
 
 	/**

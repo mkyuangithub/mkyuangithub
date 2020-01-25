@@ -1,4 +1,4 @@
-package org.sky.tcc.bankprovider.dubbo;
+package org.sky.tcc.bank.icbc.dubbo;
 
 import io.seata.rm.tcc.api.BusinessActionContext;
 import io.seata.rm.tcc.api.BusinessActionContextParameter;
