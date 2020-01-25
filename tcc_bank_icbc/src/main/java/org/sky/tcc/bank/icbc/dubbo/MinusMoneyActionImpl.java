@@ -122,8 +122,10 @@ public class MinusMoneyActionImpl extends BaseService implements MinusMoneyActio
 						return true;
 					}
 					// 释放冻结金额
-					account.setFreezedAmount(account.getFreezedAmount() - amount);
-					transferMoneyDAO.updateFreezedAmount(account);
+					if (account.getFreezedAmount() >= amount) {
+						account.setFreezedAmount(account.getFreezedAmount() - amount);
+						transferMoneyDAO.updateFreezedAmount(account);
+					}
 					logger.info(
 							String.format("======>Undo prepareMinus account[%s] amount[%f], dtx transaction id: %s.",
 									accountNo, amount, xid));
