@@ -12,8 +12,8 @@
 				onMismatch="DENY" />
 		</Console>
 		<RollingFile name="infoLog"
-			fileName="${logPath}/tcc_bank_icbc.log"
-			filePattern="${logPath}/tcc_bank_icbc_info-%d{yyyy-MM-dd}.log"
+			fileName="${logPath}/tcc_bank_cmb.log"
+			filePattern="${logPath}/tcc_bank_cmb_info-%d{yyyy-MM-dd}.log"
 			append="true" immediateFlush="true">
 			<PatternLayout pattern="%d [%t] %-5p %c - %m%n" />
 			<TimeBasedTriggeringPolicy />
@@ -31,8 +31,8 @@
 		</RollingFile>
 
 		<RollingFile name="errorLog"
-			fileName="${logPath}/tcc_bank_icbc.log_error.log"
-			filePattern="${logPath}/tcc_bank_icbc_error-%d{yyyy-MM-dd}.log"
+			fileName="${logPath}/tcc_bank_cmb.log_error.log"
+			filePattern="${logPath}/tcc_bank_cmb_error-%d{yyyy-MM-dd}.log"
 			append="true" immediateFlush="true">
 			<PatternLayout pattern="%d [%t] %-5p %c - %m%n" />
 			<TimeBasedTriggeringPolicy />
