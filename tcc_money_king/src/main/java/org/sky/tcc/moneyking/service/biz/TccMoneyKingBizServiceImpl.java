@@ -2,35 +2,24 @@ package org.sky.tcc.moneyking.service.biz;
 
 import org.sky.exception.DemoRpcRunTimeException;
 import org.sky.service.BaseService;
-import org.sky.tcc.bankprovider.dubbo.PlusMoneyAction;
-import org.sky.tcc.bankprovider.dubbo.MinusMoneyAction;
+import org.sky.tcc.bank.cmb.dubbo.PlusMoneyAction;
+import org.sky.tcc.bank.icbc.dubbo.MinusMoneyAction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import io.seata.spring.annotation.GlobalTransactional;
 
+@Service
 public class TccMoneyKingBizServiceImpl extends BaseService implements TccMoneyKingBizService {
 
-	public void setMinusMoneyAction(MinusMoneyAction minusMoneyAction) {
-		this.minusMoneyAction = minusMoneyAction;
-	}
-
-	public void setPlusMoneyAction(PlusMoneyAction plusMoneyAction) {
-		this.plusMoneyAction = plusMoneyAction;
-	}
-
+	@Autowired
 	private MinusMoneyAction minusMoneyAction;
-
+	
+	@Autowired
 	private PlusMoneyAction plusMoneyAction;
 
-	public void cmbHello() throws DemoRpcRunTimeException {
-		logger.info(plusMoneyAction.sayHello());
-	}
-
-	public void icbcHello() throws DemoRpcRunTimeException {
-		logger.info(minusMoneyAction.sayHello());
-	}
-
 	@Override
-	@GlobalTransactional(timeoutMills = 300000, name = "tcc-bank-provider")
+	@GlobalTransactional(timeoutMills = 300000, name = "tcc-bank-sample")
 	public boolean transfer(String from, String to, double amount) throws DemoRpcRunTimeException {
 
 		boolean answer = minusMoneyAction.prepareMinus(null, from, amount);

@@ -12,7 +12,7 @@
 				onMismatch="DENY" />
 		</Console>
 		<RollingFile name="infoLog"
-			fileName="${logPath}/tcc_bank_icbc.log"
+			fileName="${logPath}/tcc_money_king"
 			filePattern="${logPath}/tcc_bank_icbc_info-%d{yyyy-MM-dd}.log"
 			append="true" immediateFlush="true">
 			<PatternLayout pattern="%d [%t] %-5p %c - %m%n" />
@@ -31,7 +31,7 @@
 		</RollingFile>
 
 		<RollingFile name="errorLog"
-			fileName="${logPath}/tcc_bank_icbc.log_error.log"
+			fileName="${logPath}/tcc_money_king_error.log"
 			filePattern="${logPath}/tcc_bank_icbc_error-%d{yyyy-MM-dd}.log"
 			append="true" immediateFlush="true">
 			<PatternLayout pattern="%d [%t] %-5p %c - %m%n" />

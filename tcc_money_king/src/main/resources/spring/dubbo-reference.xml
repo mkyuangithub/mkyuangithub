@@ -25,17 +25,11 @@
 
 	<!-- 第一个TCC参与者 服务订阅 -->
 	<dubbo:reference id="minusMoneyAction"
-		interface="org.sky.tcc.bankprovider.dubbo.MinusMoneyAction"
+		interface="org.sky.tcc.bank.icbc.dubbo.MinusMoneyAction"
 		check="false" lazy="true" />
 	<!-- 第二个TCC参与者 服务订阅 -->
 	<dubbo:reference id="plusMoneyAction"
-		interface="org.sky.tcc.bankprovider.dubbo.PlusMoneyAction"
+		interface="org.sky.tcc.bank.cmb.dubbo.PlusMoneyAction"
 		check="false" lazy="true" />
-	<bean id="tccMoneyKingBizService"
-		class="org.sky.tcc.moneyking.service.biz.TccMoneyKingBizServiceImpl" />
 
-	<bean class="io.seata.spring.annotation.GlobalTransactionScanner">
-		<constructor-arg value="tcc-bank-provider" />
-		<constructor-arg value="demo-tx-grp" />
-	</bean>
 </beans>
