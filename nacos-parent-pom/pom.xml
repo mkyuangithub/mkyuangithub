@@ -31,7 +31,7 @@
 		<nacos.spring.version>0.1.4</nacos.spring.version>
 		<lombok.version>1.16.22</lombok.version>
 		<javax.servlet.version>3.1.0</javax.servlet.version>
-		<mybatis.version>3.4.5</mybatis.version>
+		<mybatis.version>3.5.6</mybatis.version>
 		<mybatis.spring.version>1.3.1</mybatis.spring.version>
 		<maven.compiler.source>${java.version}</maven.compiler.source>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
