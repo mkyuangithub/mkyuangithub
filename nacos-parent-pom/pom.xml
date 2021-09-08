@@ -13,7 +13,7 @@
 	<properties>
 		<java.version>1.8</java.version>
 		<spring-boot.version>1.5.15.RELEASE</spring-boot.version>
-		<dubbo.version>2.7.3</dubbo.version>
+		<dubbo.version>2.7.13</dubbo.version>
 		<curator-framework.version>4.0.1</curator-framework.version>
 		<curator-recipes.version>2.8.0</curator-recipes.version>
 		<druid.version>1.1.20</druid.version>
